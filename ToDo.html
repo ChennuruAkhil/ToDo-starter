@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TO DO</title>
+	<style type="text/css">
+		ul li{
+
+			width: 690px;
+			cursor: pointer;
+			background-color: #eee;
+			position: relative;
+			padding: 12px 8px 12px 5px
+		}
+		ul li:nth-child(odd){
+			background-color: #f9f9f9
+		}
+		ul li:hover{
+			background-color: #ddd
+		}
+		ul li.checked{
+			background-color: #888;
+			text-decoration: line-through;
+			color: white
+		}
+		ul li:after{
+			color: black;
+		}
+		ul span.close{
+			position: absolute;
+  right: 0;
+  top: 0;
+  padding: 12px 16px 12px 16px;
+		}
+		ul span.close:hover{
+			background-color:  #f44336;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+<div>
+<div style="width: 703px;background-color: darkcyan; left: 350px;position: relative"><br>
+<h2 style="text-align: center;color: white">My To Do List</h2>
+<input id="data"type="text" name="todo" style="width: 600px;position: relative;left: 30px;padding: 5px" placeholder="&nbsp;&nbsp;&nbsp;title" onKeyDown="if(event.keyCode==13) add();" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<button style="padding: 5px" onclick="add()">Add</button><br><br>
+</div>
+<ul class="firstly" id="ul" style="left: 310px;position: relative;list-style: none;margin: 0px;width: 74%;">
+</ul>
+</div>
+<script type="text/javascript">
+	var list = document.querySelector('ul');
+list.addEventListener('click', function(e) {
+  if (e.target.tagName === 'LI') {
+    e.target.classList.toggle('checked');
+    console.log(document.getElementsByClassName('list').value+"uhfu");
+    list.appendChild(e.target);
+    console.log(list);
+    console.log(e.target);
+  }
+}, false);
+function add(){
+	console.log("add");
+	var li=document.createElement("li");
+	li.className="list";
+	var data=document.getElementById('data').value;
+	console.log(data.value);
+	var t=document.createTextNode(data);
+	if(data==''){
+		alert("Add some task :)")
+	}
+	else{
+	li.appendChild(t);
+	var element = document.getElementById("ul");
+	element.insertBefore(li,element.childNodes[0] || null);
+}
+	document.getElementById("data").value='';
+	var span=document.createElement("span");
+	var s=document.createTextNode("\u00D7");
+	span.appendChild(s);
+	span.className="close";
+	li.appendChild(span);
+	var close = document.getElementsByClassName("close");
+for (i = 0; i < close.length; i++) {
+	console.log(close.length);
+    close[i].onclick = function() {
+    	console.log("inside hide"+i);
+      var div = this.parentElement;
+      console.log(this.parentElement.value);
+      div.style.display = "none";
+    }
+  }
+
+
+ }
+
+ window.onbeforeunload = UnLoadWindow;
+
+     function UnLoadWindow() {
+  	
+       // console.log("refresh");
+    return 'Data will be lost if you refresh';
+ }
+
+</script>
+</body>
+</html>
